@@ -76,7 +76,7 @@ module.exports.Mutation = {
 		if (published) {
 			pubsub.publish("post", {
 				post: {
-					mutation: "Create",
+					mutation: "CREATED",
 					data: post
 				}
 			});
@@ -99,7 +99,7 @@ module.exports.Mutation = {
 		if (deletedPost.published) {
 			pubsub.publish("post", {
 				post: {
-					mutation: "Delete",
+					mutation: "DELETED",
 					data: deletedPost
 				}
 			});
@@ -121,14 +121,14 @@ module.exports.Mutation = {
 			if (updatedPost.published) {
 				pubsub.publish("post", {
 					post: {
-						mutation: "Created",
+						mutation: "CREATED",
 						data: updatedPost
 					}
 				});
 			} else if (!updatedPost.published) {
 				pubsub.publish("post", {
 					post: {
-						mutation: "Deleted",
+						mutation: "DELETED",
 						data: {
 							...posts[index],
 							published: updatedPost.published
@@ -139,7 +139,7 @@ module.exports.Mutation = {
 		} else if (posts[index].published) {
 			pubsub.publish("post", {
 				post: {
-					mutation: "Updated",
+					mutation: "UPDATED",
 					data: updatedPost
 				}
 			});
@@ -176,7 +176,7 @@ module.exports.Mutation = {
 		comments.push(newComment);
 		pubsub.publish(`comment#${post}`, {
 			comment: {
-				mutation: "Created",
+				mutation: "CREATED",
 				data: newComment
 			}
 		});
@@ -193,7 +193,7 @@ module.exports.Mutation = {
 		const deletedComment = comments.splice(index, 1)[0];
 		pubsub.publish(`comment#${deletedComment.post}`, {
 			comment: {
-				mutation: "Deleted",
+				mutation: "DELETED",
 				data: deletedComment
 			}
 		});
@@ -214,7 +214,7 @@ module.exports.Mutation = {
 		if (updatedComment.comment !== comments[index].comment) {
 			pubsub.publish(`comment#${updatedComment.post}`, {
 				comment: {
-					mutation: "Updated",
+					mutation: "UPDATED",
 					data: updatedComment
 				}
 			});
