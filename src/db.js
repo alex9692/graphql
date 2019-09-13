@@ -37,7 +37,7 @@ let posts = [
 		id: "3",
 		title: "Unique",
 		body: "Whiskey...",
-		published: false,
+		published: true,
 		author: "1"
 	}
 ];
