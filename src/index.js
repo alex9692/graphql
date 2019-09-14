@@ -7,6 +7,7 @@ const { Post } = require("./resolvers/Post");
 const { User } = require("./resolvers/User");
 const { Comment } = require("./resolvers/Comment");
 const { Subscription } = require("./resolvers/Subscription");
+require("./prisma");
 
 const pubsub = new PubSub();
 
